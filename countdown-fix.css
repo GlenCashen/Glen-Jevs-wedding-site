@@ -1,0 +1,15 @@
+.flip-card::after {
+  display: none;
+}
+
+.flip-card.is-flipping strong {
+  animation-name: countSoftPulse;
+  animation-duration: 520ms;
+  animation-timing-function: ease;
+}
+
+@keyframes countSoftPulse {
+  0% { transform: scale(1); }
+  45% { transform: scale(1.04); text-shadow: 0 0 24px rgba(232, 214, 190, 0.95); }
+  100% { transform: scale(1); }
+}

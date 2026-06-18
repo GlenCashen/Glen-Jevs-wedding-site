@@ -9,6 +9,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    .loader { background: linear-gradient(rgba(255,248,239,.62), rgba(234,216,192,.82)), url("assets/kingsdale-loader.jpg") center / cover no-repeat; }
+    .reception-feature { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 70px); align-items: center; background: #fffdf8; }
+    .reception-image { min-height: 520px; border-radius: 34px; overflow: hidden; box-shadow: var(--shadow); background: linear-gradient(135deg, rgba(109,57,55,.18), rgba(140,155,130,.18)), var(--champagne); }
+    .reception-image img { width: 100%; height: 100%; min-height: 520px; display: block; object-fit: cover; transition: transform 900ms ease; }
+    .reception-image:hover img { transform: scale(1.04); }
+    .reception-copy p { color: var(--muted); font-size: 1.05rem; line-height: 1.85; }
+    .reception-image.missing-image::before { content: "Add kingsdale-reception.jpg"; height: 520px; display: grid; place-items: center; color: var(--wine); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
+    .reception-image.missing-image img { display: none; }
+    @media (max-width: 760px) { .reception-feature { grid-template-columns: 1fr; } .reception-image, .reception-image img { min-height: 320px; } }
+  </style>
 </head>
 <body>
   <div class="loader" id="loader" aria-label="Loading wedding site">

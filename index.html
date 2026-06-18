@@ -9,20 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <style>
-    .loader { background: linear-gradient(rgba(255,248,239,.62), rgba(234,216,192,.82)), url("assets/kingsdale-loader.jpg") center / cover no-repeat; }
-    .reception-feature { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(28px, 5vw, 70px); align-items: center; background: #fffdf8; }
-    .reception-image { min-height: 520px; border-radius: 34px; overflow: hidden; box-shadow: var(--shadow); background: linear-gradient(135deg, rgba(109,57,55,.18), rgba(140,155,130,.18)), var(--champagne); }
-    .reception-image img { width: 100%; height: 100%; min-height: 520px; display: block; object-fit: cover; transition: transform 900ms ease; }
-    .reception-image:hover img { transform: scale(1.04); }
-    .reception-copy p { color: var(--muted); font-size: 1.05rem; line-height: 1.85; }
-    .reception-image.missing-image::before { content: "Add kingsdale-reception.jpg"; height: 520px; display: grid; place-items: center; color: var(--wine); font-weight: 900; letter-spacing: .08em; text-transform: uppercase; }
-    .reception-image.missing-image img { display: none; }
-    @media (max-width: 760px) { .reception-feature { grid-template-columns: 1fr; } .reception-image, .reception-image img { min-height: 320px; } }
-  </style>
 </head>
 <body>
   <div class="loader" id="loader" aria-label="Loading wedding site">
+    <div class="loader-bg"></div>
     <div class="loader-card">
       <p>Jeverney & Glen</p>
       <div class="loader-ring"></div>
@@ -30,17 +20,19 @@
     </div>
   </div>
 
-  <header class="hero" id="home">
-    <nav class="nav" aria-label="Main navigation">
-      <a class="brand" href="#home">J & G</a>
-      <div class="nav-links">
-        <a href="#details">Details</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#reception">Reception</a>
-        <a href="#rsvp">RSVP</a>
-      </div>
-    </nav>
+  <nav class="nav" id="nav" aria-label="Main navigation">
+    <a class="brand" href="#home">J & G</a>
+    <div class="nav-links">
+      <a href="#details">Details</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reception">Reception</a>
+      <a href="#rsvp">RSVP</a>
+    </div>
+  </nav>
 
+  <header class="hero" id="home">
+    <div class="hero-photo" aria-hidden="true"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-backdrop" aria-hidden="true"></div>
     <div class="floating-photo photo-one" aria-hidden="true"></div>
     <div class="floating-photo photo-two" aria-hidden="true"></div>
@@ -78,33 +70,42 @@
       </div>
       <div class="card-grid">
         <article class="detail-card"><span>01</span><h3>Ceremony</h3><p>Time to be announced. Venue to be confirmed — possibly Kingsdale Estate Wines, Goulburn.</p></article>
-        <article class="detail-card"><span>02</span><h3>Reception</h3><p>Dinner, music, and celebrating to follow after the ceremony.</p></article>
+        <article class="detail-card"><span>02</span><h3>Reception</h3><p>Dinner, drinks, dancing and celebrating to follow after the ceremony.</p></article>
         <article class="detail-card"><span>03</span><h3>Dress code</h3><p>Dress to celebrate. More guidance coming soon.</p></article>
         <article class="detail-card"><span>04</span><h3>Travel</h3><p>Accommodation and transport suggestions around Goulburn will be added here.</p></article>
+      </div>
+    </section>
+
+    <section class="parallax-band reveal" data-parallax="0.18">
+      <div>
+        <p class="section-kicker">Kingsdale Estate Wines</p>
+        <h2>Vines, soft light, and a place made for celebrating.</h2>
       </div>
     </section>
 
     <section class="gallery reveal" id="gallery">
       <p class="section-kicker">A little glimpse</p>
       <h2>Golden vines, quiet moments, and a beautiful place to celebrate.</h2>
-      <p class="gallery-note">These photo slots are mapped to the images you uploaded. Add them to the <code>assets</code> folder using the filenames in <code>assets/README.md</code>.</p>
       <div class="gallery-grid">
-        <figure class="gallery-item large"><img src="assets/kingsdale-hero.jpg" alt="Sunset doorway overlooking the countryside" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Sunset doorway</figcaption></figure>
-        <figure class="gallery-item"><img src="assets/kingsdale-vines.jpg" alt="Rows of vineyard vines" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Vineyard rows</figcaption></figure>
-        <figure class="gallery-item"><img src="assets/kingsdale-2.jpg" alt="Winery pergola and vineyard view" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Estate entrance</figcaption></figure>
+        <figure class="gallery-item large lightbox-trigger" data-full="assets/IMG_4908.jpeg"><img src="assets/IMG_4908.jpeg" alt="Shot through the door" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Shot through the door</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4905.jpeg"><img src="assets/IMG_4905.jpeg" alt="Wide shot of vines" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Vineyard rows</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4907.jpeg"><img src="assets/IMG_4907.jpeg" alt="Terrace with wine sales sign" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Terrace</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/MG_4906.jpeg"><img src="assets/MG_4906.jpeg" alt="Door shot" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Doorway</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/iMG_4909.jpeg"><img src="assets/iMG_4909.jpeg" alt="Grapes" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Grapes</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4910.jpeg"><img src="assets/IMG_4910.jpeg" alt="Trees with horse" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Estate view</figcaption></figure>
       </div>
     </section>
 
-    <section class="reception-feature reveal" id="reception">
-      <div class="reception-image"><img src="assets/kingsdale-reception.jpg" alt="Barrel room reception table setting" onerror="this.parentElement.classList.add('missing-image')"></div>
+    <section class="reception-feature reveal" id="reception" data-parallax="0.12">
+      <div class="reception-image"><img src="assets/IMG_4911.jpeg" alt="Barrels and reception table setting" onerror="this.parentElement.classList.add('missing-image')"></div>
       <div class="reception-copy">
         <p class="section-kicker">Reception</p>
-        <h2>Dinner, dancing and celebrations into the evening.</h2>
+        <h2>Dinner, drinks, dancing and celebrations into the evening.</h2>
         <p>A warm winery-style reception with long tables, soft lighting, wine barrels, good food and everyone we love in one room.</p>
       </div>
     </section>
 
-    <section class="quote-band reveal"><p>“Whatever our souls are made of, yours and mine are the same.”</p></section>
+    <section class="quote-band reveal" data-parallax="0.16"><p>“Whatever our souls are made of, yours and mine are the same.”</p></section>
 
     <section class="story reveal" id="story">
       <p class="section-kicker">Our story</p>
@@ -121,6 +122,11 @@
       </div>
     </section>
   </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" type="button" aria-label="Close image">×</button>
+    <img id="lightboxImage" alt="Expanded wedding venue image" />
+  </div>
 
   <footer><p>Made with love for Jeverney & Glen · 10.03.2028</p></footer>
   <script src="script.js"></script>

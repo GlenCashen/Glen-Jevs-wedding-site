@@ -1,0 +1,86 @@
+:root {
+  --cream: #fff5c8;
+  --paper: #fff9df;
+  --champagne: #f2d47c;
+  --sage: #b7a34f;
+  --wine: #7a4a2e;
+  --charcoal: #2b2522;
+  --muted: #7c6b4b;
+  --shadow: 0 28px 80px rgba(86, 61, 16, 0.2);
+}
+
+body {
+  background:
+    radial-gradient(circle at 20% 0%, rgba(255, 224, 109, 0.36), transparent 30%),
+    var(--cream);
+}
+
+.loader-bg {
+  background:
+    linear-gradient(rgba(43, 37, 34, 0.2), rgba(255, 235, 147, 0.68)),
+    url("assets/IMG_4909.jpeg") center / cover no-repeat;
+}
+
+.hero-shade {
+  background:
+    linear-gradient(135deg, rgba(43, 37, 34, 0.54), rgba(177, 127, 28, 0.5));
+}
+
+.hero-backdrop {
+  background:
+    radial-gradient(circle at 18% 20%, rgba(255, 236, 157, 0.34), transparent 24%),
+    radial-gradient(circle at 80% 70%, rgba(255, 210, 78, 0.24), transparent 30%);
+}
+
+.nav.is-scrolled {
+  background: rgba(255, 249, 223, 0.88);
+  color: var(--wine);
+}
+
+.button.primary {
+  background: linear-gradient(135deg, #fff8dc, #f2d47c);
+  color: var(--wine);
+}
+
+.rsvp-card .button.primary {
+  background: linear-gradient(135deg, #7a4a2e, #b8862f);
+  color: #fff9df;
+}
+
+.countdown-section,
+.timeline-section,
+.party-section,
+.travel-section,
+footer {
+  background: var(--paper);
+}
+
+.flip-card,
+.detail-card,
+.timeline article,
+.party-grid article,
+.travel-grid article,
+.rsvp-card {
+  background:
+    linear-gradient(180deg, rgba(255, 253, 242, 0.95), rgba(255, 242, 181, 0.72));
+  border-color: rgba(122, 74, 46, 0.12);
+}
+
+.gallery {
+  background:
+    radial-gradient(circle at 70% 10%, rgba(242, 212, 124, 0.44), transparent 34%),
+    var(--cream);
+}
+
+.reception-feature,
+.rsvp {
+  background: linear-gradient(180deg, #fff9df, #fff0a9);
+}
+
+.petal {
+  background: rgba(255, 224, 109, 0.78);
+}
+
+.proposal-card {
+  background: rgba(255, 232, 137, 0.22);
+}

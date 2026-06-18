@@ -11,32 +11,45 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="loader" id="loader" aria-label="Loading wedding site">
+    <div class="loader-card">
+      <p>Jeverney & Glen</p>
+      <div class="loader-ring"></div>
+      <span>10 March 2028</span>
+    </div>
+  </div>
+
   <header class="hero" id="home">
     <nav class="nav" aria-label="Main navigation">
       <a class="brand" href="#home">J & G</a>
       <div class="nav-links">
         <a href="#details">Details</a>
+        <a href="#gallery">Gallery</a>
         <a href="#story">Story</a>
         <a href="#rsvp">RSVP</a>
       </div>
     </nav>
 
-    <div class="hero-content">
-      <p class="eyebrow">We are getting married</p>
-      <h1>Jeverney<br><span>&</span><br>Glen</h1>
+    <div class="hero-backdrop" aria-hidden="true"></div>
+    <div class="floating-photo photo-one" aria-hidden="true"></div>
+    <div class="floating-photo photo-two" aria-hidden="true"></div>
+
+    <div class="hero-content reveal">
+      <p class="eyebrow">Save the date</p>
+      <h1><span class="line">Jeverney</span><span class="amp">&</span><span class="line">Glen</span></h1>
       <p class="date">Friday, 10 March 2028</p>
-      <p class="intro">A day for family, friends, good food, happy tears, and celebrating the start of our forever.</p>
+      <p class="intro">A romantic Goulburn celebration surrounded by vines, golden light, family, friends, and the start of our forever.</p>
       <div class="hero-actions">
         <a class="button primary" href="#rsvp">RSVP</a>
         <a class="button ghost" href="#details">View details</a>
       </div>
     </div>
 
-    <div class="scroll-note">Scroll for details</div>
+    <div class="scroll-note">Scroll</div>
   </header>
 
   <main>
-    <section class="countdown-section" aria-label="Wedding countdown">
+    <section class="countdown-section reveal" aria-label="Wedding countdown">
       <p class="section-kicker">Counting down to the day</p>
       <div class="countdown" id="countdown">
         <div><strong id="days">—</strong><span>Days</span></div>
@@ -46,7 +59,7 @@
       </div>
     </section>
 
-    <section class="split" id="details">
+    <section class="split reveal" id="details">
       <div>
         <p class="section-kicker">The celebration</p>
         <h2>Join us as we say “I do”.</h2>
@@ -76,22 +89,28 @@
       </div>
     </section>
 
-    <section class="quote-band">
-      <p>“Whatever our souls are made of, yours and mine are the same.”</p>
-    </section>
-
-    <section class="story" id="story">
-      <p class="section-kicker">Our story</p>
-      <h2>Two lives, one beautiful next chapter.</h2>
-      <p>This space is ready for the story of how Jeverney and Glen met, the proposal, favourite memories, and the little details that make the day feel like yours.</p>
-      <div class="photo-placeholders" aria-label="Photo placeholders">
-        <div>Add photo</div>
-        <div>Add photo</div>
-        <div>Add photo</div>
+    <section class="gallery reveal" id="gallery">
+      <p class="section-kicker">A little glimpse</p>
+      <h2>Golden vines, quiet moments, and a beautiful place to celebrate.</h2>
+      <p class="gallery-note">Replace these with approved Kingsdale Estate Wines images in the <code>assets</code> folder. Use landscape photos without people for the best look.</p>
+      <div class="gallery-grid">
+        <figure class="gallery-item large"><img src="assets/kingsdale-1.jpg" alt="Kingsdale Estate Wines landscape placeholder" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Vineyard view</figcaption></figure>
+        <figure class="gallery-item"><img src="assets/kingsdale-2.jpg" alt="Winery detail placeholder" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Estate details</figcaption></figure>
+        <figure class="gallery-item"><img src="assets/kingsdale-3.jpg" alt="Goulburn sunset placeholder" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Golden hour</figcaption></figure>
       </div>
     </section>
 
-    <section class="rsvp" id="rsvp">
+    <section class="quote-band reveal">
+      <p>“Whatever our souls are made of, yours and mine are the same.”</p>
+    </section>
+
+    <section class="story reveal" id="story">
+      <p class="section-kicker">Our story</p>
+      <h2>Two lives, one beautiful next chapter.</h2>
+      <p>This space is ready for the story of how Jeverney and Glen met, the proposal, favourite memories, and the little details that make the day feel like yours.</p>
+    </section>
+
+    <section class="rsvp reveal" id="rsvp">
       <div class="rsvp-card">
         <p class="section-kicker">Save the date</p>
         <h2>10 March 2028</h2>

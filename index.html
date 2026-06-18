@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
+  <div class="petals" id="petals" aria-hidden="true"></div>
+
   <div class="loader" id="loader" aria-label="Loading wedding site">
     <div class="loader-bg"></div>
     <div class="loader-card">
@@ -25,7 +28,8 @@
     <div class="nav-links">
       <a href="#details">Details</a>
       <a href="#gallery">Gallery</a>
-      <a href="#reception">Reception</a>
+      <a href="#story">Story</a>
+      <a href="#travel">Travel</a>
       <a href="#rsvp">RSVP</a>
     </div>
   </nav>
@@ -54,11 +58,11 @@
   <main>
     <section class="countdown-section reveal" aria-label="Wedding countdown">
       <p class="section-kicker">Counting down to the day</p>
-      <div class="countdown" id="countdown">
-        <div><strong id="days">—</strong><span>Days</span></div>
-        <div><strong id="hours">—</strong><span>Hours</span></div>
-        <div><strong id="minutes">—</strong><span>Minutes</span></div>
-        <div><strong id="seconds">—</strong><span>Seconds</span></div>
+      <div class="countdown flip-countdown" id="countdown">
+        <div class="flip-card"><strong id="days">—</strong><span>Days</span></div>
+        <div class="flip-card"><strong id="hours">—</strong><span>Hours</span></div>
+        <div class="flip-card"><strong id="minutes">—</strong><span>Minutes</span></div>
+        <div class="flip-card"><strong id="seconds">—</strong><span>Seconds</span></div>
       </div>
     </section>
 
@@ -90,8 +94,8 @@
         <figure class="gallery-item large lightbox-trigger" data-full="assets/IMG_4908.jpeg"><img src="assets/IMG_4908.jpeg" alt="Shot through the door" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Shot through the door</figcaption></figure>
         <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4905.jpeg"><img src="assets/IMG_4905.jpeg" alt="Wide shot of vines" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Vineyard rows</figcaption></figure>
         <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4907.jpeg"><img src="assets/IMG_4907.jpeg" alt="Terrace with wine sales sign" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Terrace</figcaption></figure>
-        <figure class="gallery-item lightbox-trigger" data-full="assets/MG_4906.jpeg"><img src="assets/MG_4906.jpeg" alt="Door shot" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Doorway</figcaption></figure>
-        <figure class="gallery-item lightbox-trigger" data-full="assets/iMG_4909.jpeg"><img src="assets/iMG_4909.jpeg" alt="Grapes" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Grapes</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4906.jpeg"><img src="assets/IMG_4906.jpeg" alt="Door shot" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Doorway</figcaption></figure>
+        <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4909.jpeg"><img src="assets/IMG_4909.jpeg" alt="Grapes" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Grapes</figcaption></figure>
         <figure class="gallery-item lightbox-trigger" data-full="assets/IMG_4910.jpeg"><img src="assets/IMG_4910.jpeg" alt="Trees with horse" onerror="this.parentElement.classList.add('missing-image')"><figcaption>Estate view</figcaption></figure>
       </div>
     </section>
@@ -105,13 +109,45 @@
       </div>
     </section>
 
-    <section class="quote-band reveal" data-parallax="0.16"><p>“Whatever our souls are made of, yours and mine are the same.”</p></section>
-
-    <section class="story reveal" id="story">
+    <section class="timeline-section reveal" id="story">
       <p class="section-kicker">Our story</p>
-      <h2>Two lives, one beautiful next chapter.</h2>
-      <p>This space is ready for the story of how Jeverney and Glen met, the proposal, favourite memories, and the little details that make the day feel like yours.</p>
+      <h2>How we got here.</h2>
+      <div class="timeline">
+        <article><span>01</span><h3>How we met</h3><p>Add the story of the first time you met, the little details you both remember, and what made it special.</p></article>
+        <article><span>02</span><h3>Our favourite chapter</h3><p>Add a favourite trip, memory, moment, or season together that feels like you.</p></article>
+        <article><span>03</span><h3>The proposal</h3><p>Add where it happened, how it happened, and the part neither of you will ever forget.</p></article>
+        <article><span>04</span><h3>The wedding</h3><p>10 March 2028 — celebrating with family and friends in Goulburn.</p></article>
+      </div>
     </section>
+
+    <section class="proposal-section reveal">
+      <div class="proposal-card">
+        <p class="section-kicker">The proposal</p>
+        <h2>A moment worth remembering.</h2>
+        <p>This section is ready for the proposal story. Add the place, the surprise, the yes, and the little details that made it yours.</p>
+      </div>
+    </section>
+
+    <section class="party-section reveal">
+      <p class="section-kicker">Wedding party</p>
+      <h2>The people beside us.</h2>
+      <div class="party-grid">
+        <article><span>J</span><h3>Jeverney's side</h3><p>Names coming soon.</p></article>
+        <article><span>G</span><h3>Glen's side</h3><p>Names coming soon.</p></article>
+      </div>
+    </section>
+
+    <section class="travel-section reveal" id="travel">
+      <p class="section-kicker">Travel & stay</p>
+      <h2>Coming to Goulburn.</h2>
+      <div class="travel-grid">
+        <article><h3>Accommodation</h3><p>Hotel and motel suggestions around Goulburn will be added once the venue is confirmed.</p></article>
+        <article><h3>Transport</h3><p>Shuttle or bus details will be added if the final venue needs transport.</p></article>
+        <article><h3>Weekend notes</h3><p>Check back closer to the date for timing, maps, and local recommendations.</p></article>
+      </div>
+    </section>
+
+    <section class="quote-band reveal" data-parallax="0.16"><p>“Whatever our souls are made of, yours and mine are the same.”</p></section>
 
     <section class="rsvp reveal" id="rsvp">
       <div class="rsvp-card">

@@ -9,24 +9,24 @@ const fields = {
 
 const previousValues = {};
 
-function setFlipValue(key, value) {
-  const field = fields[key];
+function setField(name, value) {
+  const field = fields[name];
   if (!field) return;
 
-  if (previousValues[key] !== undefined && previousValues[key] !== value) {
+  if (previousValues[name] !== undefined && previousValues[name] !== value) {
     const card = field.closest(".flip-card");
     if (card) {
       card.classList.remove("is-flipping");
       void card.offsetWidth;
       card.classList.add("is-flipping");
-      setTimeout(function () {
+      window.setTimeout(function () {
         card.classList.remove("is-flipping");
-      }, 360);
+      }, 560);
     }
   }
 
   field.textContent = value;
-  previousValues[key] = value;
+  previousValues[name] = value;
 }
 
 function updateCountdown() {
@@ -34,10 +34,10 @@ function updateCountdown() {
   const diff = weddingDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    setFlipValue("days", "0");
-    setFlipValue("hours", "00");
-    setFlipValue("minutes", "00");
-    setFlipValue("seconds", "00");
+    setField("days", "0");
+    setField("hours", "00");
+    setField("minutes", "00");
+    setField("seconds", "00");
     return;
   }
 
@@ -47,10 +47,10 @@ function updateCountdown() {
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
 
-  setFlipValue("days", days.toLocaleString());
-  setFlipValue("hours", String(hours).padStart(2, "0"));
-  setFlipValue("minutes", String(minutes).padStart(2, "0"));
-  setFlipValue("seconds", String(remainingSeconds).padStart(2, "0"));
+  setField("days", days.toLocaleString());
+  setField("hours", String(hours).padStart(2, "0"));
+  setField("minutes", String(minutes).padStart(2, "0"));
+  setField("seconds", String(remainingSeconds).padStart(2, "0"));
 }
 
 function showPage() {
@@ -124,8 +124,8 @@ function setupLightbox() {
 
   triggers.forEach(function (trigger) {
     trigger.addEventListener("click", function () {
-      const fallbackImage = trigger.querySelector("img");
-      const src = trigger.getAttribute("data-full") || (fallbackImage ? fallbackImage.src : "");
+      const imageElement = trigger.querySelector("img");
+      const src = trigger.getAttribute("data-full") || (imageElement ? imageElement.src : "");
       if (src) openLightbox(src);
     });
   });
@@ -148,7 +148,7 @@ function setupParallax() {
       const speed = Number(item.getAttribute("data-parallax")) || 0.1;
       const rect = item.getBoundingClientRect();
       const offset = rect.top * speed;
-      item.style.backgroundPosition = "center calc(50% + " + offset + "px)";
+      item.style.backgroundPosition = `center calc(50% + ${offset}px)`;
     });
   }
 
@@ -157,40 +157,48 @@ function setupParallax() {
   window.addEventListener("resize", updateParallax);
 }
 
-function setupPetals() {
-  const container = document.getElementById("petals");
-  if (!container || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  for (let index = 0; index < 26; index += 1) {
-    const petal = document.createElement("span");
-    petal.className = "petal";
-    petal.style.left = Math.random() * 100 + "vw";
-    petal.style.animationDuration = 7 + Math.random() * 9 + "s";
-    petal.style.animationDelay = Math.random() * 8 + "s";
-    petal.style.opacity = String(0.28 + Math.random() * 0.52);
-    petal.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
-    container.appendChild(petal);
-  }
-}
-
 function setupCursor() {
   const cursor = document.getElementById("customCursor");
-  if (!cursor || window.matchMedia("(max-width: 760px)").matches) return;
+  if (!cursor || window.matchMedia("(pointer: coarse)").matches) return;
 
   document.addEventListener("mousemove", function (event) {
+    cursor.classList.add("is-visible");
     cursor.style.left = event.clientX + "px";
     cursor.style.top = event.clientY + "px";
   });
 
-  const hoverTargets = document.querySelectorAll("a, button, .lightbox-trigger, .detail-card, .party-grid article, .travel-grid article");
-  hoverTargets.forEach(function (target) {
-    target.addEventListener("mouseenter", function () {
-      cursor.classList.add("is-hovering");
+  document.querySelectorAll("a, button, .lightbox-trigger").forEach(function (item) {
+    item.addEventListener("mouseenter", function () {
+      cursor.classList.add("is-active");
     });
-    target.addEventListener("mouseleave", function () {
-      cursor.classList.remove("is-hovering");
+    item.addEventListener("mouseleave", function () {
+      cursor.classList.remove("is-active");
     });
   });
+}
+
+function setupPetals() {
+  const petals = document.getElementById("petals");
+  if (!petals || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  function createPetal() {
+    const petal = document.createElement("span");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.opacity = String(0.35 + Math.random() * 0.45);
+    petal.style.animationDuration = 7 + Math.random() * 8 + "s";
+    petal.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
+    petals.appendChild(petal);
+    window.setTimeout(function () {
+      petal.remove();
+    }, 16000);
+  }
+
+  for (let i = 0; i < 14; i += 1) {
+    window.setTimeout(createPetal, i * 260);
+  }
+
+  window.setInterval(createPetal, 900);
 }
 
 updateCountdown();
@@ -199,6 +207,6 @@ revealSections();
 setupNav();
 setupLightbox();
 setupParallax();
-setupPetals();
 setupCursor();
+setupPetals();
 window.addEventListener("load", showPage);

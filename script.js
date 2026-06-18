@@ -1,32 +1,21 @@
 const weddingDate = new Date("2028-03-10T15:00:00+11:00");
+const countdownStart = new Date("2026-06-18T00:00:00+10:00");
 
 const fields = {
   days: document.getElementById("days"),
   hours: document.getElementById("hours"),
   minutes: document.getElementById("minutes"),
   seconds: document.getElementById("seconds"),
+  progress: document.getElementById("countdownProgress"),
+  countdown: document.getElementById("countdown"),
 };
 
-const previousValues = {};
+let lastDisplay = "";
 
-function setField(name, value) {
-  const field = fields[name];
-  if (!field) return;
-
-  if (previousValues[name] !== undefined && previousValues[name] !== value) {
-    const card = field.closest(".flip-card");
-    if (card) {
-      card.classList.remove("is-flipping");
-      void card.offsetWidth;
-      card.classList.add("is-flipping");
-      window.setTimeout(function () {
-        card.classList.remove("is-flipping");
-      }, 560);
-    }
+function setText(element, value) {
+  if (element && element.textContent !== value) {
+    element.textContent = value;
   }
-
-  field.textContent = value;
-  previousValues[name] = value;
 }
 
 function updateCountdown() {
@@ -34,23 +23,43 @@ function updateCountdown() {
   const diff = weddingDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    setField("days", "0");
-    setField("hours", "00");
-    setField("minutes", "00");
-    setField("seconds", "00");
+    setText(fields.days, "0");
+    setText(fields.hours, "00");
+    setText(fields.minutes, "00");
+    setText(fields.seconds, "00");
+    if (fields.progress) fields.progress.style.width = "100%";
     return;
   }
 
-  const seconds = Math.floor(diff / 1000);
-  const days = Math.floor(seconds / 86400);
-  const hours = Math.floor((seconds % 86400) / 3600);
-  const minutes = Math.floor((seconds % 3600) / 60);
-  const remainingSeconds = seconds % 60;
+  const totalSeconds = Math.floor(diff / 1000);
+  const days = Math.floor(totalSeconds / 86400);
+  const hours = Math.floor((totalSeconds % 86400) / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
 
-  setField("days", days.toLocaleString());
-  setField("hours", String(hours).padStart(2, "0"));
-  setField("minutes", String(minutes).padStart(2, "0"));
-  setField("seconds", String(remainingSeconds).padStart(2, "0"));
+  const display = `${days}-${hours}-${minutes}-${seconds}`;
+  if (lastDisplay && lastDisplay !== display && fields.countdown) {
+    fields.countdown.classList.remove("changed");
+    void fields.countdown.offsetWidth;
+    fields.countdown.classList.add("changed");
+    window.setTimeout(function () {
+      fields.countdown.classList.remove("changed");
+    }, 560);
+  }
+  lastDisplay = display;
+
+  setText(fields.days, days.toLocaleString());
+  setText(fields.hours, String(hours).padStart(2, "0"));
+  setText(fields.minutes, String(minutes).padStart(2, "0"));
+  setText(fields.seconds, String(seconds).padStart(2, "0"));
+
+  if (fields.progress) {
+    const start = countdownStart.getTime();
+    const end = weddingDate.getTime();
+    const elapsed = Math.max(0, Math.min(now.getTime() - start, end - start));
+    const progress = Math.round((elapsed / (end - start)) * 1000) / 10;
+    fields.progress.style.width = progress + "%";
+  }
 }
 
 function showPage() {

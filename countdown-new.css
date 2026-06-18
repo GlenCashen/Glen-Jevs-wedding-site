@@ -1,0 +1,189 @@
+.countdown-section {
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 224, 109, 0.42), transparent 38%),
+    linear-gradient(180deg, var(--paper), var(--cream));
+}
+
+.countdown-wrap {
+  width: min(980px, 100%);
+  margin: 34px auto 0;
+  display: grid;
+  grid-template-columns: minmax(260px, 0.9fr) 1.1fr;
+  gap: 18px;
+  align-items: stretch;
+}
+
+.days-to-go {
+  position: relative;
+  min-height: 360px;
+  display: grid;
+  place-items: center;
+  padding: 34px;
+  border-radius: 42px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 242, 0.94), rgba(255, 239, 158, 0.72)),
+    radial-gradient(circle at 50% 24%, rgba(255, 224, 109, 0.6), transparent 42%);
+  border: 1px solid rgba(122, 74, 46, 0.12);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.days-to-go::before {
+  content: "";
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  border: 1px solid rgba(122, 74, 46, 0.12);
+  box-shadow: inset 0 0 70px rgba(242, 212, 124, 0.42);
+}
+
+.days-to-go::after {
+  content: "";
+  position: absolute;
+  inset: 22px;
+  border-radius: 34px;
+  border: 1px solid rgba(255, 255, 255, 0.62);
+}
+
+.days-to-go-inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.days-to-go strong {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(5rem, 12vw, 9rem);
+  line-height: 0.82;
+  color: var(--wine);
+  letter-spacing: -0.07em;
+}
+
+.days-to-go span {
+  display: block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 900;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.countdown-side {
+  display: grid;
+  gap: 18px;
+}
+
+.countdown-date-card,
+.countdown-progress-card {
+  padding: clamp(24px, 4vw, 38px);
+  border-radius: 34px;
+  background: rgba(255, 253, 242, 0.76);
+  border: 1px solid rgba(122, 74, 46, 0.1);
+  box-shadow: 0 18px 50px rgba(86, 61, 16, 0.12);
+  backdrop-filter: blur(14px);
+}
+
+.countdown-date-card h3 {
+  color: var(--wine);
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+}
+
+.countdown-date-card p,
+.countdown-progress-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.time-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.time-chip {
+  padding: 18px 12px;
+  border-radius: 24px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 237, 148, 0.42));
+  border: 1px solid rgba(122, 74, 46, 0.09);
+}
+
+.time-chip strong {
+  display: block;
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(2rem, 4vw, 3.3rem);
+  line-height: 0.9;
+  color: var(--wine);
+}
+
+.time-chip span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.progress-track {
+  position: relative;
+  height: 12px;
+  margin-top: 22px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(122, 74, 46, 0.12);
+}
+
+.progress-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f2d47c, #b8862f, #fff0a9);
+  box-shadow: 0 0 24px rgba(242, 212, 124, 0.64);
+  transition: width 900ms ease;
+}
+
+.countdown-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.countdown.changed .days-to-go strong,
+.countdown.changed .time-chip strong {
+  animation: countGlow 520ms ease;
+}
+
+@keyframes countGlow {
+  0% { transform: translateY(0); text-shadow: none; }
+  45% { transform: translateY(-2px); text-shadow: 0 0 24px rgba(242, 212, 124, 0.95); }
+  100% { transform: translateY(0); text-shadow: none; }
+}
+
+@media (max-width: 820px) {
+  .countdown-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .days-to-go {
+    min-height: 300px;
+  }
+}
+
+@media (max-width: 520px) {
+  .time-chips {
+    grid-template-columns: 1fr;
+  }
+}

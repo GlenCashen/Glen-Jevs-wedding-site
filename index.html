@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="countdown-fix.css" />
   <link rel="stylesheet" href="yellow-theme.css" />
+  <link rel="stylesheet" href="countdown-new.css" />
 </head>
 <body>
   <div class="custom-cursor" id="customCursor" aria-hidden="true"></div>
@@ -60,11 +60,29 @@
   <main>
     <section class="countdown-section reveal" aria-label="Wedding countdown">
       <p class="section-kicker">Counting down to the day</p>
-      <div class="countdown flip-countdown" id="countdown">
-        <div class="flip-card"><strong id="days">—</strong><span>Days</span></div>
-        <div class="flip-card"><strong id="hours">—</strong><span>Hours</span></div>
-        <div class="flip-card"><strong id="minutes">—</strong><span>Minutes</span></div>
-        <div class="flip-card"><strong id="seconds">—</strong><span>Seconds</span></div>
+      <div class="countdown countdown-wrap" id="countdown">
+        <div class="days-to-go">
+          <div class="days-to-go-inner">
+            <strong id="days">—</strong>
+            <span>Days to go</span>
+          </div>
+        </div>
+        <div class="countdown-side">
+          <div class="countdown-date-card">
+            <h3>10 March 2028</h3>
+            <p>Every day brings us closer to celebrating with everyone we love in Goulburn.</p>
+            <div class="time-chips">
+              <div class="time-chip"><strong id="hours">—</strong><span>Hours</span></div>
+              <div class="time-chip"><strong id="minutes">—</strong><span>Minutes</span></div>
+              <div class="time-chip"><strong id="seconds">—</strong><span>Seconds</span></div>
+            </div>
+          </div>
+          <div class="countdown-progress-card">
+            <p>Progress from today to the wedding day</p>
+            <div class="progress-track"><div class="progress-fill" id="countdownProgress"></div></div>
+            <div class="countdown-meta"><span>Today</span><span>Wedding day</span></div>
+          </div>
+        </div>
       </div>
     </section>
 

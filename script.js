@@ -7,15 +7,37 @@ const fields = {
   seconds: document.getElementById("seconds"),
 };
 
+const previousValues = {};
+
+function setFlipValue(key, value) {
+  const field = fields[key];
+  if (!field) return;
+
+  if (previousValues[key] !== undefined && previousValues[key] !== value) {
+    const card = field.closest(".flip-card");
+    if (card) {
+      card.classList.remove("is-flipping");
+      void card.offsetWidth;
+      card.classList.add("is-flipping");
+      setTimeout(function () {
+        card.classList.remove("is-flipping");
+      }, 360);
+    }
+  }
+
+  field.textContent = value;
+  previousValues[key] = value;
+}
+
 function updateCountdown() {
   const now = new Date();
   const diff = weddingDate.getTime() - now.getTime();
 
   if (diff <= 0) {
-    fields.days.textContent = "0";
-    fields.hours.textContent = "00";
-    fields.minutes.textContent = "00";
-    fields.seconds.textContent = "00";
+    setFlipValue("days", "0");
+    setFlipValue("hours", "00");
+    setFlipValue("minutes", "00");
+    setFlipValue("seconds", "00");
     return;
   }
 
@@ -25,10 +47,10 @@ function updateCountdown() {
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
 
-  fields.days.textContent = days.toLocaleString();
-  fields.hours.textContent = String(hours).padStart(2, "0");
-  fields.minutes.textContent = String(minutes).padStart(2, "0");
-  fields.seconds.textContent = String(remainingSeconds).padStart(2, "0");
+  setFlipValue("days", days.toLocaleString());
+  setFlipValue("hours", String(hours).padStart(2, "0"));
+  setFlipValue("minutes", String(minutes).padStart(2, "0"));
+  setFlipValue("seconds", String(remainingSeconds).padStart(2, "0"));
 }
 
 function showPage() {
@@ -102,7 +124,8 @@ function setupLightbox() {
 
   triggers.forEach(function (trigger) {
     trigger.addEventListener("click", function () {
-      const src = trigger.getAttribute("data-full") || trigger.querySelector("img")?.src;
+      const fallbackImage = trigger.querySelector("img");
+      const src = trigger.getAttribute("data-full") || (fallbackImage ? fallbackImage.src : "");
       if (src) openLightbox(src);
     });
   });
@@ -125,7 +148,7 @@ function setupParallax() {
       const speed = Number(item.getAttribute("data-parallax")) || 0.1;
       const rect = item.getBoundingClientRect();
       const offset = rect.top * speed;
-      item.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      item.style.backgroundPosition = "center calc(50% + " + offset + "px)";
     });
   }
 
@@ -134,10 +157,48 @@ function setupParallax() {
   window.addEventListener("resize", updateParallax);
 }
 
+function setupPetals() {
+  const container = document.getElementById("petals");
+  if (!container || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  for (let index = 0; index < 26; index += 1) {
+    const petal = document.createElement("span");
+    petal.className = "petal";
+    petal.style.left = Math.random() * 100 + "vw";
+    petal.style.animationDuration = 7 + Math.random() * 9 + "s";
+    petal.style.animationDelay = Math.random() * 8 + "s";
+    petal.style.opacity = String(0.28 + Math.random() * 0.52);
+    petal.style.setProperty("--drift", (Math.random() * 180 - 90) + "px");
+    container.appendChild(petal);
+  }
+}
+
+function setupCursor() {
+  const cursor = document.getElementById("customCursor");
+  if (!cursor || window.matchMedia("(max-width: 760px)").matches) return;
+
+  document.addEventListener("mousemove", function (event) {
+    cursor.style.left = event.clientX + "px";
+    cursor.style.top = event.clientY + "px";
+  });
+
+  const hoverTargets = document.querySelectorAll("a, button, .lightbox-trigger, .detail-card, .party-grid article, .travel-grid article");
+  hoverTargets.forEach(function (target) {
+    target.addEventListener("mouseenter", function () {
+      cursor.classList.add("is-hovering");
+    });
+    target.addEventListener("mouseleave", function () {
+      cursor.classList.remove("is-hovering");
+    });
+  });
+}
+
 updateCountdown();
 setInterval(updateCountdown, 1000);
 revealSections();
 setupNav();
 setupLightbox();
 setupParallax();
+setupPetals();
+setupCursor();
 window.addEventListener("load", showPage);
